@@ -1,0 +1,21 @@
+.loader {
+  display: block;
+  margin: 0 1em;
+  animation: color 3s ease-in-out infinite;
+}
+
+@keyframes color {
+  100%,
+  0% {
+    color: var(--2);
+  }
+  30% {
+    color: var(--3);
+  }
+  60% {
+    color: var(--5);
+  }
+  80% {
+    color: var(--3);
+  }
+}

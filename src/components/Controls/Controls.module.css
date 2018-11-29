@@ -1,0 +1,11 @@
+.wrapper {
+  display: flex;
+  flex-wrap: wrap;
+  flex-basis: 100%;
+  align-items: center;
+  justify-content: center;
+  position: absolute;
+  right: 0;
+  z-index: 1;
+  margin: 0 1.5rem;
+}

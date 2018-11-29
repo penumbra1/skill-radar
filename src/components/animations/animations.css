@@ -1,0 +1,46 @@
+/* FADE */
+
+.fade-enter {
+  opacity: 0;
+}
+.fade-enter-active {
+  opacity: 1;
+  transition: opacity 400ms ease-in-out;
+}
+.fade-enter-done {
+  opacity: 1;
+}
+.fade-exit {
+  opacity: 1;
+}
+.fade-exit-active {
+  opacity: 0;
+  transition: opacity 400ms ease-in-out;
+}
+.fade-exit-done {
+  opacity: 0;
+  display: none;
+}
+
+/* DIM */
+
+.dim-enter {
+  filter: opacity(1) saturate(1);
+}
+.dim-enter-active {
+  filter: opacity(0.5) saturate(0.7);
+  transition: filter 300ms ease-in-out;
+}
+.dim-enter-done {
+  filter: opacity(0.5) saturate(0.7);
+}
+.dim-exit {
+  filter: opacity(0.5) saturate(0.7);
+}
+.dim-exit-active {
+  filter: opacity(1) saturate(1);
+  transition: filter 300ms ease-in-out;
+}
+.dim-exit-done {
+  filter: opacity(1) saturate(1);
+}

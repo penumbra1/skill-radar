@@ -1,44 +1,29 @@
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+I love data visualisation, and I've started to explore how to do it in React. For this small job profile dashboard, I'm using the awesome [react-vis](https://uber.github.io/react-vis/) library.
 
-## Available Scripts
+The data comes from the [Open Skills API](https://github.com/workforce-data-initiative/skills-api).
 
-In the project directory, you can run:
+## Under the hood
 
-### `npm start`
+The input populates asynchronously. I started out with (react-select)[https://github.com/JedWatson/react-select], but switched to [Ant design](https://ant.design/) (Antd) as its select component is better at handling long lists.
 
-Runs the app in the development mode.<br>
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+Antd came in useful for the rest of the UI as well. I rewired CRA to override Antd's default theme via [craco-antd](https://github.com/FormAPI/craco-antd).
 
-The page will reload if you make edits.<br>
-You will also see any lint errors in the console.
+There's an open issue with Antd importing [the entire icon pack](https://github.com/ant-design/ant-design/issues/12011)), which will probably be [fixed](https://github.com/ant-design/ant-design/issues/12011#issuecomment-433775872) soon. I'm grabbing the icons manually for now, as suggested [here](https://github.com/ant-design/ant-design/issues/12011#issuecomment-423470708).
 
-### `npm test`
+I added a custom loader to the input and the graphs. It receives the colors for @keyframes as locally scoped CSS variables via props.
 
-Launches the test runner in the interactive watch mode.<br>
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+## Issues
 
-### `npm run build`
+### Styles
 
-Builds the app for production to the `build` folder.<br>
-It correctly bundles React in production mode and optimizes the build for the best performance.
+I wanted the illustration to dim along with the text when data is loading, but to stay in place when tabs change. As antd tab animation relies on margins, I had to render the illustration via a React portal to keep it from moving but constrain it to the content area.
 
-The build is minified and the filenames include the hashes.<br>
-Your app is ready to be deployed!
+### Data
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+Ideally, jobs should be compared across the same subset of skills, e.g. top 10 skills across all jobs. Looks like there is [no way to get a list of top skills by overall frequency](https://github.com/workforce-data-initiative/skills-api/issues/30) (except for crunching the dataset myself). Currently the profile graph shows top 15 skills by importance for each particular job. However, as top skills differ across jobs, the y-axis ticks change almost every time the job is updated. The smooth bar chart transition essentially makes no sense when dimensions change. I really don't like it, but I'm not up to data analysis for now:)
 
-### `npm run eject`
+In progress: job comparison via a [parallel coordinates](https://uber.github.io/react-vis/documentation/other-charts/parallel-coordinates) chart.
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+Todo:
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (Webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
-
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
+- memoization & pure components

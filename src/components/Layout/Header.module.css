@@ -1,0 +1,17 @@
+.wrapper {
+  padding: 1.5rem 0 1rem 0;
+}
+
+.wrapper h1 {
+  font-family: "Roboto";
+  font-weight: 400;
+  font-size: 32px;
+  color: #baafb6;
+  text-align: center;
+  text-transform: uppercase;
+  margin-bottom: 0.5rem;
+}
+
+.wrapper h2 {
+  text-align: center;
+}
