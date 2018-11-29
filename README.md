@@ -16,13 +16,17 @@ I added a custom loader to the input and the graphs. It receives the colors for 
 
 ### Styles
 
-I wanted the illustration to dim along with the text when data is loading, but to stay in place when tabs change. As antd tab animation relies on margins, I had to render the illustration via a React portal to keep it from moving but constrain it to the content area.
+I wanted the illustration to dim along with the text when data is loading, but to stay in place when tabs change. As antd tab animation relies on margins, I had to render the illustration via a React portal to keep it from moving and constrain it to the content area.
 
 ### Data
 
 Ideally, jobs should be compared across the same subset of skills, e.g. top 10 skills across all jobs. Looks like there is [no way to get a list of top skills by overall frequency](https://github.com/workforce-data-initiative/skills-api/issues/30) (except for crunching the dataset myself). Currently the profile graph shows top 15 skills by importance for each particular job. However, as top skills differ across jobs, the y-axis ticks change almost every time the job is updated. The smooth bar chart transition essentially makes no sense when dimensions change. I really don't like it, but I'm not up to data analysis for now:)
 
-In progress: job comparison via a [parallel coordinates](https://uber.github.io/react-vis/documentation/other-charts/parallel-coordinates) chart.
+## In progress
+
+- job comparison via a [parallel coordinates](https://uber.github.io/react-vis/documentation/other-charts/parallel-coordinates) chart
+- related jobs
+-
 
 Todo:
 
