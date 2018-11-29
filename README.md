@@ -26,7 +26,6 @@ Ideally, jobs should be compared across the same subset of skills, e.g. top 10 s
 
 - job comparison via a [parallel coordinates](https://uber.github.io/react-vis/documentation/other-charts/parallel-coordinates) chart
 - related jobs
--
 
 Todo:
 
