@@ -1,8 +1,13 @@
 import debounce from "awesome-debounce-promise";
 
-export const hasData = obj => {
-  const lists = Object.values(obj);
-  return lists.length > 0 && lists.every(l => l.length > 0);
+export const isEmpty = x => {
+  if (Array.isArray(x)) {
+    return x.length === 0;
+  }
+  if (typeof x === "object") {
+    return Object.keys(x).length === 0;
+  }
+  return x == null;
 };
 
 const searchJobsRequest = async (text = "") => {
@@ -100,14 +105,14 @@ export const processSkills = skillsArray => {
   const skills = getTopNSkillsBy(skill, "importance", 15);
   const abilities = getTopNSkillsBy(ability, "importance", 15);
 
-  const skillsList = getTopNSkillsBy(skill, "importance", 10);
-  const topSkills = { fields, skills, abilities };
+  const topSkillsList = getTopNSkillsBy(skill, "importance", 10);
+  const topSkillsByType = { fields, skills, abilities };
 
-  return [skillsList, topSkills];
+  return [topSkillsList, topSkillsByType];
 };
 
-export const intersectSkills = (jobMaps, skillsArray, job) => {
-  let entries = skillsArray.map(({ id, name, level }) => [id, { name, level }]);
+export const intersectSkills = (jobMaps, skillsList, job) => {
+  let entries = skillsList.map(({ id, name, level }) => [id, { name, level }]);
 
   if (jobMaps.length > 0) {
     // Use the first jobMap to get an intersection of keys (skill ids)

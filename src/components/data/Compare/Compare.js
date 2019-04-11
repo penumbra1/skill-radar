@@ -1,8 +1,7 @@
 import React from "react";
 import ParallelChart from "./ParallelChart";
-import styles from "../data.module.css";
 
-const data = [
+const testData = [
   {
     name: "Honda",
     mileage: 8,
@@ -43,10 +42,10 @@ const domains = [
 
 const Compare = ({ data = [] }) => {
   return (
-    <article className={styles.wrapper}>
+    <>
       <h3>Skills in common</h3>
       <ParallelChart data={data} domains={domains} />
-    </article>
+    </>
   );
 };
 

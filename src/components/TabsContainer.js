@@ -1,8 +1,7 @@
 import React, { PureComponent } from "react";
 import { Tabs } from "antd";
-import ContentAnimation from "./animations/animations";
-import Message from "./Message/Message";
-import Backdrop from "./Message/Backdrop";
+import Backdrop from "./Backdrop/Backdrop";
+import Tab from "./Tab/Tab";
 
 const TabPane = Tabs.TabPane;
 
@@ -14,7 +13,7 @@ const text = {
   related: "Discover occupations with a similar skill profile."
 };
 
-class TabContainer extends PureComponent {
+class TabsContainer extends PureComponent {
   state = { activeKey: undefined };
 
   handleChange = activeKey => {
@@ -38,10 +37,7 @@ class TabContainer extends PureComponent {
               key={tab}
               forceRender
             >
-              <ContentAnimation show={!!content}>{content}</ContentAnimation>
-              <ContentAnimation show={!content}>
-                <Message>{error || text[tab]}</Message>
-              </ContentAnimation>
+              <Tab message={error || text[tab]}>{content}</Tab>
             </TabPane>
           ))}
         </Tabs>
@@ -51,4 +47,4 @@ class TabContainer extends PureComponent {
   }
 }
 
-export default TabContainer;
+export default TabsContainer;

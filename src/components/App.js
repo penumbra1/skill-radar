@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import {
+  isEmpty,
   processSkills,
   getRelatedSkills,
   intersectSkills,
@@ -7,20 +8,21 @@ import {
 } from "../lib/utils";
 import Layout from "./Layout/Layout";
 import Controls from "./Controls/Controls";
-import TabContainer from "./TabContainer";
+import TabsContainer from "./TabsContainer";
 import Profile from "./data/Profile/Profile";
 import Compare from "./data/Compare/Compare";
+import Related from "./data/Related/Related";
 
 const Status = React.createContext();
 
 // CONSIDER: Use PureComponent for shallow compare.
-// State.compare is mutable via push(), but the entire Apps
+// State.compare is mutable via push(), but the entire App
 // doesn't need to rerender as it's only used for the Compare component
 class App extends Component {
   state = {
     job: null,
-    skillsList: [],
-    topSkills: {},
+    topSkillsList: [],
+    topSkillsByType: {},
     compare: [],
     relatedJobs: [],
     error: null,
@@ -36,27 +38,27 @@ class App extends Component {
         getRelatedJobs(this.state.job.id)
       ]);
 
-      let newState = {};
+      let skillsState = {};
 
-      if (allSkills.length > 0) {
-        const [skillsList, topSkills] = processSkills(allSkills);
+      if (!isEmpty(allSkills)) {
+        const [topSkillsList, topSkillsByType] = processSkills(allSkills);
 
-        newState = {
-          skillsList,
-          topSkills,
+        skillsState = {
+          topSkillsList,
+          topSkillsByType,
           error: null
         };
       } else {
-        newState = {
-          skillsList: [],
-          topSkills: {},
+        skillsState = {
+          topSkillsList: [],
+          topSkillsByType: {},
           error: `Hm, it appears we haven't talked to a ${
             this.state.job.title
           } yet... Please search for someone else or explore related occupations.`
         };
       }
 
-      this.setState({ ...newState, relatedJobs, loading: false });
+      this.setState({ ...skillsState, relatedJobs, loading: false });
     }
   }
 
@@ -65,10 +67,10 @@ class App extends Component {
   };
 
   handleCompare = () => {
-    this.setState(({ compare, skillsList, job: selectedJob }) => {
+    this.setState(({ compare, topSkillsList, job: selectedJob }) => {
       if (!compare.find(j => j.job.id === selectedJob.id)) {
         return {
-          compare: intersectSkills(compare, skillsList, selectedJob)
+          compare: intersectSkills(compare, topSkillsList, selectedJob)
         };
       }
       // Avoid render if job was already added to compare
@@ -77,7 +79,14 @@ class App extends Component {
   };
 
   render() {
-    const { job, error, loading, topSkills, compare, relatedJobs } = this.state;
+    const {
+      job,
+      error,
+      loading,
+      topSkillsByType,
+      compare,
+      relatedJobs
+    } = this.state;
 
     return (
       <Status.Provider value={{ loading, error }}>
@@ -86,23 +95,13 @@ class App extends Component {
             onSelect={this.handleJobSubmit}
             onClick={this.handleCompare}
           />
-          <TabContainer
+          <TabsContainer
             error={error}
             profile={
-              Object.keys(topSkills).length > 0 && <Profile {...topSkills} />
+              !isEmpty(topSkillsByType) && <Profile {...topSkillsByType} />
             }
-            compare={compare.length > 0 && <Compare data={compare} />}
-            related={
-              relatedJobs.length > 0 && (
-                <div>
-                  {relatedJobs.map(j => (
-                    <p key={j.id} style={{ display: "inline-block" }}>
-                      {j.title}
-                    </p>
-                  ))}
-                </div>
-              )
-            }
+            compare={!isEmpty(compare) && <Compare data={compare} />}
+            related={!isEmpty(relatedJobs) && <Related jobs={relatedJobs} />}
           />
         </Layout>
       </Status.Provider>

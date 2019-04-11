@@ -1,10 +1,10 @@
-I love data visualisation, and I've started to explore how to do it in React. For this small job profile dashboard, I'm using the awesome [react-vis](https://uber.github.io/react-vis/) library.
+I love data visualisation, and I've started to explore how to do it in React. For this job profile dashboard, I'm using the awesome [react-vis](https://uber.github.io/react-vis/) library.
 
 The data comes from the [Open Skills API](https://github.com/workforce-data-initiative/skills-api).
 
 ## Under the hood
 
-The input populates asynchronously. I started out with (react-select)[https://github.com/JedWatson/react-select], but switched to [Ant design](https://ant.design/) (Antd) as its select component is better at handling long lists.
+The input populates asynchronously. I started out with [react-select](https://github.com/JedWatson/react-select), but switched to [Ant design](https://ant.design/) (Antd) as its select component is better at handling long lists.
 
 Antd came in useful for the rest of the UI as well. I rewired CRA to override Antd's default theme via [craco-antd](https://github.com/FormAPI/craco-antd).
 
@@ -30,3 +30,4 @@ Ideally, jobs should be compared across the same subset of skills, e.g. top 10 s
 Todo:
 
 - memoization & pure components
+- intersection observer for related jobs animation

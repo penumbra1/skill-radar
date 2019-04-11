@@ -15,4 +15,4 @@ const ContentAnimation = ({ children, show = true }) => (
   </Status.Consumer>
 );
 
-export { ContentAnimation as default };
+export default ContentAnimation;
