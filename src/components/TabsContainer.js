@@ -36,6 +36,9 @@ class TabsContainer extends PureComponent {
               tab={`${tab[0].toUpperCase()}${tab.slice(1)}`}
               key={tab}
               forceRender
+            style={{
+              maxWidth: "95vw"
+            }}
             >
               <Tab message={error || text[tab]}>{content}</Tab>
             </TabPane>
