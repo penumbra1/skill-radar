@@ -8,6 +8,7 @@ const Option = Select.Option;
 export default class SearchInput extends React.Component {
   state = {
     options: [],
+    // value null won't work: https://github.com/react-component/select/issues/265
     value: undefined,
     loadingOptions: false
   };
