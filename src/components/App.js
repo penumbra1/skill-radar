@@ -25,11 +25,19 @@ class App extends Component {
     topSkillsByType: {},
     compare: [],
     relatedJobs: [],
+    activeTab: "profile",
     error: null,
     loading: false
   };
 
   async componentDidUpdate(prevProps, prevState) {
+    // Avoid rerender on tab change
+    if (
+      (!prevState.job || this.state.job.id === prevState.job.id) &&
+      prevState.activeTab !== this.state.activeTab
+    )
+      return null;
+
     if (!prevState.job || this.state.job.id !== prevState.job.id) {
       this.setState({ loading: true });
 
@@ -49,20 +57,28 @@ class App extends Component {
           error: null
         };
       } else {
+        const error = this.state.job.title
+          ? `Hm, it appears we haven't talked to a ${
+              this.state.job.title
+            } yet... Please search for someone else or explore related occupations.`
+          : "Ouch, something went wrong, please try another search.";
         skillsState = {
           topSkillsList: [],
           topSkillsByType: {},
-          error: `Hm, it appears we haven't talked to a ${
-            this.state.job.title
-          } yet... Please search for someone else or explore related occupations.`
+          error
         };
       }
 
-      this.setState({ ...skillsState, relatedJobs, loading: false });
+      this.setState({
+        ...skillsState,
+        relatedJobs,
+        loading: false,
+        activeTab: "profile"
+      });
     }
   }
 
-  handleJobSubmit = job => {
+  handleSearch = job => {
     this.setState({ job });
   };
 
@@ -78,30 +94,47 @@ class App extends Component {
     });
   };
 
+  handleRelated = e => {
+    const { id, title } = e.target.dataset;
+    this.setState({ job: { id, title } });
+  };
+
+  handleTabChange = tabKey => {
+    this.setState({ activeTab: tabKey });
+  };
+
   render() {
     const {
       job,
-      error,
-      loading,
       topSkillsByType,
       compare,
-      relatedJobs
+      relatedJobs,
+      activeTab,
+      error,
+      loading
     } = this.state;
 
     return (
       <Status.Provider value={{ loading, error }}>
         <Layout title={job && job.title}>
           <Controls
-            onSelect={this.handleJobSubmit}
+            onSelect={this.handleSearch}
             onClick={this.handleCompare}
+            job={this.state.job}
           />
           <TabsContainer
             error={error}
+            activeTab={activeTab}
+            onChange={this.handleTabChange}
             profile={
               !isEmpty(topSkillsByType) && <Profile {...topSkillsByType} />
             }
             compare={!isEmpty(compare) && <Compare data={compare} />}
-            related={!isEmpty(relatedJobs) && <Related jobs={relatedJobs} />}
+            related={
+              !isEmpty(relatedJobs) && (
+                <Related jobs={relatedJobs} onClick={this.handleRelated} />
+              )
+            }
           />
         </Layout>
       </Status.Provider>

@@ -1,4 +1,4 @@
-import React, { PureComponent } from "react";
+import React from "react";
 import { Tabs } from "antd";
 import Backdrop from "./Backdrop/Backdrop";
 import Tab from "./Tab/Tab";
@@ -13,41 +13,32 @@ const text = {
   related: "Discover occupations with a similar skill profile."
 };
 
-class TabsContainer extends PureComponent {
-  state = { activeKey: undefined };
-
-  handleChange = activeKey => {
-    this.setState({ activeKey });
-  };
-
-  render() {
-    const { error, ...tabs } = this.props;
-    const activeKey = this.state.activeKey || Object.keys(tabs)[0];
-
-    return (
-      <>
-        <Tabs
-          activeKey={activeKey}
-          tabBarStyle={{ margin: "0 1.5rem" }}
-          onChange={this.handleChange}
-        >
-          {Object.entries(tabs).map(([tab, content]) => (
-            <TabPane
-              tab={`${tab[0].toUpperCase()}${tab.slice(1)}`}
-              key={tab}
-              forceRender
+const TabsContainer = ({ activeTab, onChange, error, ...tabs }) => {
+  return (
+    <>
+      <Tabs
+        activeKey={activeTab}
+        tabBarStyle={{
+          margin: "0 1.5rem"
+        }}
+        onChange={onChange}
+      >
+        {Object.entries(tabs).map(([tab, content]) => (
+          <TabPane
+            tab={`${tab[0].toUpperCase()}${tab.slice(1)}`}
+            key={tab}
+            forceRender
             style={{
               maxWidth: "95vw"
             }}
-            >
-              <Tab message={error || text[tab]}>{content}</Tab>
-            </TabPane>
-          ))}
-        </Tabs>
-        <Backdrop show={!tabs[activeKey]} />
-      </>
-    );
-  }
-}
+          >
+            <Tab message={error || text[tab]}>{content}</Tab>
+          </TabPane>
+        ))}
+      </Tabs>
+      <Backdrop show={!tabs[activeTab]} />
+    </>
+  );
+};
 
 export default TabsContainer;
