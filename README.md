@@ -22,6 +22,8 @@ I wanted the illustration to dim along with the text when data is loading, but t
 
 Ideally, jobs should be compared across the same subset of skills, e.g. top 10 skills across all jobs. Looks like there is [no way to get a list of top skills by overall frequency](https://github.com/workforce-data-initiative/skills-api/issues/30) (except for crunching the dataset myself). Currently the profile graph shows top 15 skills by importance for each particular job. However, as top skills differ across jobs, the y-axis ticks change almost every time the job is updated. The smooth bar chart transition essentially makes no sense when dimensions change. I really don't like it, but I'm not up to data analysis for now:)
 
+Related jobs have the same skill profile, but I show profiles for them anyway (it would be nice to have more granular data).
+
 ## In progress
 
 - job comparison via a [parallel coordinates](https://uber.github.io/react-vis/documentation/other-charts/parallel-coordinates) chart
@@ -31,3 +33,4 @@ Todo:
 
 - memoization & pure components
 - intersection observer for related jobs animation
+- routing by occupation

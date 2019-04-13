@@ -1,14 +1,23 @@
 import React from "react";
+import Button from "antd/lib/button";
+import styles from "./Related.module.css";
 
-const Related = ({ jobs }) => {
+const Related = ({ jobs, onClick }) => {
   return (
-    <>
+    <div className={styles.wrapper}>
       {jobs.map(({ id, title }) => (
-        <p key={id} style={{ display: "inline-block" }}>
+        <Button
+          key={id}
+          className={styles.item}
+          href="#"
+          onClick={onClick}
+          data-id={id}
+          data-title={title}
+        >
           {title}
-        </p>
+        </Button>
       ))}
-    </>
+    </div>
   );
 };
 

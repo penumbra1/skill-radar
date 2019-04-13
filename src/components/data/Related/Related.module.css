@@ -1,0 +1,12 @@
+.wrapper {
+  width: 100%;
+  max-width: 900px;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+}
+
+.item {
+  margin: 0.6rem;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
