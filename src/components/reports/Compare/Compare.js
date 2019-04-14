@@ -1,26 +1,6 @@
 import React from "react";
 import ParallelChart from "./ParallelChart";
-
-// const testData = [
-//   {
-//     name: "Honda",
-//     mileage: 8,
-//     price: 6,
-//     safety: 9
-//   },
-//   {
-//     name: "Toyota",
-//     mileage: 1,
-//     price: 3,
-//     safety: 5
-//   }
-// ];
-
-// const testDomains = [
-//   { name: "mileage", domain: [0, 10] },
-//   { name: "price", domain: [0, 10] },
-//   { name: "safety", domain: [0, 10] }
-// ];
+import styles from "./Compare.module.css";
 
 const getDomains = data => {
   const maxLevel = Math.ceil(
@@ -38,10 +18,10 @@ const Compare = ({ data = [] }) => {
   if (data.length === 0) return null;
 
   return (
-    <>
+    <div className={styles.chart}>
       <h3>Skills in common</h3>
       <ParallelChart data={data} domains={getDomains(data)} />
-    </>
+    </div>
   );
 };
 

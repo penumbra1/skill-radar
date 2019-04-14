@@ -1,23 +1,27 @@
 import React from "react";
 
+const capitalize = text => text.charAt(0).toUpperCase() + text.slice(1);
+
 // Multiline axis ticks, 3 words per line
 // Example: https://github.com/uber/react-vis/issues/488
 const createMultilineTick = (label, tickProps) => {
-  const tickLines = label.split(" ").reduce(
-    (lines, word) => {
-      let currentLine = lines[lines.length - 1];
-      const currentLength = currentLine.join(" ").length;
+  const tickLines = capitalize(label)
+    .split(" ")
+    .reduce(
+      (lines, word) => {
+        let currentLine = lines[lines.length - 1];
+        const currentLength = currentLine.join(" ").length;
 
-      if (currentLength + word.length > 21) {
-        lines.push([]);
-        currentLine = lines[lines.length - 1];
-      }
+        if (currentLength + word.length > 21) {
+          lines.push([]);
+          currentLine = lines[lines.length - 1];
+        }
 
-      currentLine.push(word);
-      return lines;
-    },
-    [[]]
-  );
+        currentLine.push(word);
+        return lines;
+      },
+      [[]]
+    );
 
   const spans = tickLines.map((line, i) => (
     <tspan

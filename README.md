@@ -36,3 +36,4 @@ Todo:
 - routing by occupation
 - move compare button out of controls into compare tab
 - investigate perf issues in Parallel Chart label series
+- turn parallel chart into radar chart
