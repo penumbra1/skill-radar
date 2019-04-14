@@ -35,5 +35,5 @@ Todo:
 - intersection observer for related jobs animation + collapsible groups by field
 - routing by occupation
 - move compare button out of controls into compare tab
-- investigate perf issues in Parallel Chart label series
+- investigate rerendering in Parallel Chart label series
 - turn parallel chart into radar chart

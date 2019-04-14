@@ -1,6 +1,6 @@
 .chart {
   display: flex;
   flex-direction: column;
-  padding: 1.5rem;
+  padding: 1.2rem;
   transition: filter 1s;
 }

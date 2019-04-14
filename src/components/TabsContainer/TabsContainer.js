@@ -19,7 +19,7 @@ const TabsContainer = ({ activeTab, onChange, error, ...tabs }) => {
       <Tabs
         activeKey={activeTab}
         tabBarStyle={{
-          margin: "0 1.5rem"
+          margin: "0 1.2rem"
         }}
         onChange={onChange}
       >

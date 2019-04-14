@@ -25,12 +25,11 @@ function getLabelsData(props) {
 class VerticalLabelSeries extends LabelSeries {
   getLabel = labelData => {
     const xFunctor = this._getAttributeFunctor("x");
-    console.log(xFunctor(labelData));
-    return createMultilineTick(labelData.label, { x: xFunctor(labelData) });
+    const x = xFunctor(labelData);
+    return createMultilineTick(labelData.label, { x });
   };
 
   render() {
-    console.log("render series");
     return (
       <LabelSeries
         {...this.props}
@@ -41,8 +40,7 @@ class VerticalLabelSeries extends LabelSeries {
   }
 }
 
-const ParallelChart = ({ data, className, domains }) => {
-  console.log("render chart");
+const ParallelChart = ({ data, domains }) => {
   return (
     <ParallelCoordinates
       data={data}
@@ -56,10 +54,12 @@ const ParallelChart = ({ data, className, domains }) => {
     >
       <VerticalLabelSeries
         domains={domains}
-        data={getLabelsData({ domains, rotation: -90 })}
-        animation
+        data={getLabelsData({
+          domains,
+          rotation: -90,
+          style: { fontSize: 13 }
+        })}
         className="rv-xy-plot__axis__tick__text" // imitate axis tick styles
-        style={{ fontSize: 13 }}
       />
     </ParallelCoordinates>
   );
