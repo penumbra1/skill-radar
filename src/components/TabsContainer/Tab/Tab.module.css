@@ -1,4 +1,6 @@
 .message {
+  position: absolute;
+  width: 100%;
   text-align: center;
   padding: 10vh 20vw 12vh;
   font-size: 1.2rem;

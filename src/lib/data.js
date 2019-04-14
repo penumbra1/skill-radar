@@ -112,12 +112,12 @@ export const processSkills = skillsArray => {
 };
 
 export const intersectSkills = (jobMaps, skillsList, job) => {
-  let entries = skillsList.map(({ id, name, level }) => [id, { name, level }]);
+  let entries = skillsList.map(({ name: skill, level }) => [skill, level]);
 
   if (jobMaps.length > 0) {
-    // Use the first jobMap to get an intersection of keys (skill ids)
-    // as the other maps should have the same keys
-    entries = entries.filter(([id]) => jobMaps[0].data.has(id));
+    // Get an intersection of skills between the first jobMap and the current job
+    // (the other jobMaps already have the same keys as the first one)
+    entries = entries.filter(([skill]) => jobMaps[0].levels.has(skill));
   }
 
   const newMap = new Map(entries);
@@ -125,10 +125,10 @@ export const intersectSkills = (jobMaps, skillsList, job) => {
   // Now newMap contains a new intersection of keys
   // Use it to clean up up other maps
   for (let j of jobMaps) {
-    for (let id of j.data.keys()) {
-      if (!newMap.has(id)) j.data.delete(id);
+    for (let skill of j.levels.keys()) {
+      if (!newMap.has(skill)) j.levels.delete(skill);
     }
   }
 
-  return [...jobMaps, { job, data: newMap }];
+  return [...jobMaps, { name: job.title, id: job.id, levels: newMap }];
 };

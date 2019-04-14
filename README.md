@@ -32,5 +32,7 @@ Related jobs have the same skill profile, but I show profiles for them anyway (i
 Todo:
 
 - memoization & pure components
-- intersection observer for related jobs animation
+- intersection observer for related jobs animation + collapsible groups by field
 - routing by occupation
+- move compare button out of controls into compare tab
+- investigate perf issues in Parallel Chart label series

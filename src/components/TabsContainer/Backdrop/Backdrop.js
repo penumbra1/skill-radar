@@ -1,6 +1,6 @@
 import React, { PureComponent } from "react";
 import ReactDOM from "react-dom";
-import ContentAnimation from "../animations/ContentAnimation";
+import ContentAnimation from "../../animations/ContentAnimation";
 import styles from "./Backdrop.module.css";
 
 const Picture = () => <div className={`${styles.picture}`} />;

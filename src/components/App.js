@@ -5,13 +5,13 @@ import {
   getRelatedSkills,
   intersectSkills,
   getRelatedJobs
-} from "../lib/utils";
+} from "../lib/data";
 import Layout from "./Layout/Layout";
 import Controls from "./Controls/Controls";
-import TabsContainer from "./TabsContainer";
-import Profile from "./data/Profile/Profile";
-import Compare from "./data/Compare/Compare";
-import Related from "./data/Related/Related";
+import TabsContainer from "./TabsContainer/TabsContainer";
+import Profile from "./reports/Profile/Profile";
+import Compare from "./reports/Compare/Compare";
+import Related from "./reports/Related/Related";
 
 const Status = React.createContext();
 
@@ -72,8 +72,7 @@ class App extends Component {
       this.setState({
         ...skillsState,
         relatedJobs,
-        loading: false,
-        activeTab: "profile"
+        loading: false
       });
     }
   }
@@ -84,13 +83,12 @@ class App extends Component {
 
   handleCompare = () => {
     this.setState(({ compare, topSkillsList, job: selectedJob }) => {
-      if (!compare.find(j => j.job.id === selectedJob.id)) {
-        return {
-          compare: intersectSkills(compare, topSkillsList, selectedJob)
-        };
-      }
       // Avoid render if job was already added to compare
-      return null;
+      if (compare.find(j => j.id === selectedJob.id)) return null;
+
+      return {
+        compare: intersectSkills(compare, topSkillsList, selectedJob)
+      };
     });
   };
 

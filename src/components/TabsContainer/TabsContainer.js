@@ -29,10 +29,13 @@ const TabsContainer = ({ activeTab, onChange, error, ...tabs }) => {
             key={tab}
             forceRender
             style={{
-              maxWidth: "95vw"
+              maxWidth: "95vw",
+              position: "relative"
             }}
           >
-            <Tab message={error || text[tab]}>{content}</Tab>
+            <Tab error={error} fallback={text[tab]}>
+              {content}
+            </Tab>
           </TabPane>
         ))}
       </Tabs>

@@ -1,6 +1,6 @@
 import React from "react";
 import Select from "antd/lib/select";
-import { searchJobs } from "../../lib/utils";
+import { searchJobs } from "../../lib/data";
 import Loader from "../Loader/Loader";
 
 const Option = Select.Option;
