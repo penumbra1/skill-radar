@@ -3,14 +3,14 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
-    "@craco/craco": "^3.1.0",
+    "@craco/craco": "^5.6.2",
     "antd": "^3.10.8",
-    "awesome-debounce-promise": "^1.0.0",
+    "awesome-debounce-promise": "^2.1.0",
     "craco-antd": "^1.5.0",
     "react": "^16.6.3",
     "react-dom": "^16.6.3",
-    "react-scripts": "2.1.1",
-    "react-transition-group": "^2.5.0",
+    "react-scripts": "3.2.0",
+    "react-transition-group": "^4.3.0",
     "react-vis": "^1.11.4"
   },
   "scripts": {
