@@ -4,6 +4,8 @@ The data comes from the [Open Skills API](https://github.com/workforce-data-init
 
 ## Under the hood
 
+[![Greenkeeper badge](https://badges.greenkeeper.io/penumbra1/skill-radar.svg)](https://greenkeeper.io/)
+
 The input populates asynchronously. I started out with [react-select](https://github.com/JedWatson/react-select), but switched to [Ant design](https://ant.design/) (Antd) as its select component is better at handling long lists.
 
 Antd came in useful for the rest of the UI as well. I rewired CRA to override Antd's default theme via [craco-antd](https://github.com/FormAPI/craco-antd).
